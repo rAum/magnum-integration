@@ -27,7 +27,7 @@
 #
 
 find_package(Magnum REQUIRED GL)
-find_package(ImGui REQUIRED Sources)
+#find_package(ImGui REQUIRED)
 
 if(BUILD_STATIC)
     set(MAGNUM_IMGUIINTEGRATION_BUILD_STATIC 1)
@@ -65,12 +65,10 @@ set_target_properties(MagnumImGuiIntegration PROPERTIES
     FOLDER "Magnum/ImGuiIntegration")
 if(NOT BUILD_STATIC)
     set_target_properties(MagnumImGuiIntegration PROPERTIES VERSION ${MAGNUM_LIBRARY_VERSION} SOVERSION ${MAGNUM_LIBRARY_SOVERSION})
-elseif(BUILD_STATIC_PIC)
-    set_target_properties(MagnumImGuiIntegration PROPERTIES POSITION_INDEPENDENT_CODE ON)
 endif()
+    set_target_properties(MagnumImGuiIntegration PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(MagnumImGuiIntegration
-    PUBLIC Magnum::GL ImGui::ImGui
-    PRIVATE ImGui::Sources)
+    PUBLIC Magnum::GL imgui::imgui)
 
 if(BUILD_TESTS)
     add_subdirectory(Test)
